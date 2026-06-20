@@ -86,3 +86,45 @@ List of confirmed working devices under the wisp name (Probably more out there):
 
 [Build TWRP Recovery](https://github.com/OpenWatchProject/readme/blob/master/wisp/twrp.md)
 
+# For Zeblaze Smart Watch
+
+Someone has managed to activate developer options on Zeblaze Thor Ultra.
+Open Phone app and type *#*#83781#*#*
+On the second tab, activate USB debugging.
+
+
+I then used the program "ADB App Control" for windows:
+
+https://adbappcontrol.com/en/
+
+The program manages everything (drivers etc.), so using ADB is plug and play.
+
+Connect the watch to the pc with the charging cable , which is usable for data transfer too (two of the for pins are for data transport).
+
+You can now manage apps etc. comfortably from your pc and don't have to fiddle around with the small watch screen.
+
+But even better: You can change all system options even developer options with adb commands in the console of ADB App Control!
+
+F.ex.: I wanted to use an external bluetooth gps with the watch, because the built-in gps of the watch is crap.
+
+To do this you have to allow mock locations and a special mocking app (I use the app "bluetooth GNSS" as mocking app with a garmin glo 2 bluetooth gps-receiver).
+
+These options are developer options, so you cannot acces them via the system settings on the watch because developer options
+
+It looks like that in the console:
+
+Type:
+
+adb shell settings put secure mock_location 1 
+
+(Use 1 to enable and 0 to disable)
+
+then type:
+
+adb shell appops set com.example.my.package android:mock_location allow
+
+In my case the adb-package-name of the app "bluetooth gnss" is "com.clearevo.bluetooth-gnss" so you have to replace "com.example.my.package" with that.
+
+In my case everything worked fine!
+With ADB you can change all developer options.
+All you have to do is to find the right commands for the console using google.
